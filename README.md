@@ -1,16 +1,17 @@
-# CS-312 MiniProject-1: Blog Web Application
+# MiniProject-3: Blog Web Application with PostgreSQL & Authentication
 
 ## 📌 Project Overview
 
-This is a Blog Web Application built using Node.js, Express.js, and EJS as part of the CS-312 MiniProject-1 assignment. The application allows users to:
+This is the continuation of MiniProject-1, now upgraded to a fully functional web app with **PostgreSQL database integration** and **user authentication**.
 
+Users can:
+- Sign up and log in securely
 - Create blog posts
-- View blog posts
-- Edit blog posts
-- Delete blog posts
-- Filter posts by category (Bonus Feature)
+- View blog feed
+- Edit or delete only their own posts
+- See preloaded blog content from the database
 
-> ⚠ **Note:** Data is not persistent. Posts are stored in-memory and will reset when the server restarts.
+>  Data is now **persistent** using PostgreSQL.
 
 ---
 
@@ -19,46 +20,57 @@ This is a Blog Web Application built using Node.js, Express.js, and EJS as part 
 - Node.js
 - Express.js
 - EJS (Embedded JavaScript Templates)
-- Bootstrap 5
+- PostgreSQL
+- bcrypt (for password hashing)
+- express-session
 - HTML / CSS
 
 ---
 
 ## 🚀 Features
 
-- Create new blog posts (author, title, content, category, date)
-- View all posts on homepage
-- Edit existing posts
-- Delete posts
-- Filter posts by category: Tech, Lifestyle, Education (Bonus)
-- Responsive UI using Bootstrap
+- User Sign Up and Sign In
+- Passwords securely stored using `bcrypt`
+- Blog post creation, editing, deletion
+- Server-side session-based authentication
+- Only the creator can edit/delete their posts
+- Posts stored in PostgreSQL with timestamps and categories
+- Responsive UI using custom CSS
 
 ---
 
 ## 📂 Project Structure
 
 ```
-
-CS-312-MiniProject-1/
+CS-312-MiniProject-3/
 │
-├── app.js               # Main server file
-├── package.json         # Project dependencies
+├── app.js                 # Main Express app entry point
+├── db.js                  # PostgreSQL connection setup
+├── .env                   # Environment variables
+├── database.sql           # SQL used for table creation
 │
-├── views/               # EJS templates
+├── routes/
+│   ├── auth.js            # Routes for login/signup
+│   └── blogs.js           # Routes for creating/editing/deleting blogs
+│
+├── middleware/
+│   └── auth.js            # Middleware for route protection
+│
+├── views/                 # EJS templates
 │   ├── partials/
-│   │   ├── header.ejs
-│   │   └── footer.ejs
 │   ├── home.ejs
-│   ├── new\.ejs
-│   └── edit.ejs
+│   ├── new.ejs
+│   ├── edit.ejs
+│   ├── signup.ejs
+│   └── signin.ejs
 │
 ├── public/
 │   └── css/
-│       └── styles.css   # Custom styling
+│       └── style.css      # Custom styling
 │
-└── README.md            # Project documentation
-
-````
+├── package.json           # Project metadata and dependencies
+└── README.md              # Project documentation
+```
 
 ---
 
@@ -67,13 +79,13 @@ CS-312-MiniProject-1/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/avnishsinha/CS-312-MiniProject-1
-````
+git clone https://github.com/avnishsinha/CS-312-MiniProject-3
+```
 
-### 2️⃣ Navigate into the Project Folder
+### 2️⃣ Navigate into the Project Directory
 
 ```bash
-cd CS-312-MiniProject-1
+cd CS-312-MiniProject-3
 ```
 
 ### 3️⃣ Install Dependencies
@@ -82,23 +94,49 @@ cd CS-312-MiniProject-1
 npm install
 ```
 
-### 4️⃣ Start the Server
+### 4️⃣ Configure Environment Variables
 
-```bash
-node app.js
+Create a `.env` file:
+```env
+DB_USER=your_pg_username
+DB_HOST=localhost
+DB_NAME=BlogDB
+DB_PASSWORD=your_pg_password
+DB_PORT=5432
+SESSION_SECRET=your-super-secret-session-key
+PORT=3000
 ```
 
-### 5️⃣ Open Browser
+### 5️⃣ Start the Server
+
+```bash
+npm start
+```
+
+### 6️⃣ Open the App
 
 ```
 http://localhost:3000
 ```
+
+---
+
+## 🧪 Default Test Users
+
+These are pre-seeded into the PostgreSQL database:
+
+| User ID | Password | Name    |
+|---------|----------|---------|
+| user1   | 1234     | Alice   |
+| user2   | 5678     | Bob     |
+| user3   | abcd     | Charlie |
+
 ---
 
 ## ✅ Submission Info
 
-**Submitted by:** Avnish Sinha
-**Course:** CS-312
+**Submitted by:** Avnish Sinha  
+**Course:** CS-312 Web Programming II  
+**Mini Project:** #3 — Database Integration & Authentication
 
-
-
+---
