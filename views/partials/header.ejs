@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Web App</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/blogs" style="color: white; text-decoration: none;">My Blog</a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <% if (user) { %>
+                            <li><a href="/blogs">Home</a></li>
+                            <li><a href="/blogs/new">New Post</a></li>
+                            <li><span style="color: #fff; padding: 0.5rem 1rem;">Welcome, <%= user.name %></span></li>
+                            <li><a href="/logout">Logout</a></li>
+                        <% } else { %>
+                            <li><a href="/signin">Sign In</a></li>
+                            <li><a href="/signup">Sign Up</a></li>
+                        <% } %>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+</body>
+</html> 
